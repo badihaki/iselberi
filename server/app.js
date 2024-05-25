@@ -8,3 +8,7 @@ app.get("/hello", (req, res)=>{
 app.listen(port, (connection)=>{
     console.log(`started listening on port ${port}`);
 })
+
+/*
+mongodb+srv://jojackblack:VaZ0t4CIOhjp1eBL@cluster0.yysbreu.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+*/
