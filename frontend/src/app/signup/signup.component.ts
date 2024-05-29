@@ -48,7 +48,8 @@ export class SignupComponent {
              console.log(data);
           },
           error: (err)=>{
-            console.log(err);
+            this.addError(err.error.error);
+            this.startErrorTimer();
           },
           complete: ()=>{
             console.log("done with sign up flow");

@@ -9,22 +9,22 @@ router.get("/", (req, res)=>{
 })
 
 router.post("/signup", async (req, res)=>{
-    // console.log(req.body);
-    const { email, password, confirmPassword, username } = req.body;
+    console.log(req.body);
+    const { email, password, passwordConfirmation, username } = req.body;
     
-    const duplicateEmail = await User.find({email});
+    const duplicateEmail = await User.findOne({email});
+    console.log(duplicateEmail);
 
     if(duplicateEmail){
         res.status(400).send({error:"An account is already created using this email address"});
         return;
     }
-    if(password === confirmPassword){
+    if(password === passwordConfirmation){
         try{
             const hash = await argon.hash(password);
             const newUser = new userModel({
                 username, email, password:hash
             })
-            // console.log(newUser);
             await newUser.save();
             res.status(200).send({username, email});
             return;
