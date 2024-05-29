@@ -22,7 +22,7 @@
     @if (formErrors.length != 0) {
         <br>
         @for (err of formErrors; track $index) {
-            <span>{{ err }}</span>
+            <span class="error">{{ err }}</span>
         }
     }
 </div>
