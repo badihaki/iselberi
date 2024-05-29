@@ -9,11 +9,9 @@ router.get("/", (req, res)=>{
 })
 
 router.post("/signup", async (req, res)=>{
-    console.log(req.body);
     const { email, password, passwordConfirmation, username } = req.body;
     
     const duplicateEmail = await User.findOne({email});
-    console.log(duplicateEmail);
 
     if(duplicateEmail){
         res.status(400).send({error:"An account is already created using this email address"});
