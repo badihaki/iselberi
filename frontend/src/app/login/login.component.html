@@ -9,6 +9,6 @@
         <br>
         <input type="password" name="loginPassword" id="loginPassword" formControlName="password" />
         <br>
-        <button type="submit">Submit</button>
+        <button type="submit" [disabled]="!loginForm.valid">Submit</button>
     </form>
 </div>

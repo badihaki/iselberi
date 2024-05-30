@@ -38,4 +38,28 @@ router.post("/signup", async (req, res)=>{
     }
 })
 
+router.post("/login", async (req, res) => {
+    const { email, password } = req.body;
+    const user = await User.findOne({email});
+    if(user){
+        try{
+            if(await argon.verify(user.password, password)){
+                console.log(user);
+                const foundUser = {email, password, username: user.username};
+                res.status(200).send(foundUser);
+                return;
+            }
+        }
+        catch(err){
+            console.log(err);
+            res.status(400).send("naw, homes, passwords dont match");
+            return
+        }
+    }
+    else{
+        res.status(400).send("naw, homes, no user found");
+        return
+    }
+})
+
 module.exports = router;
