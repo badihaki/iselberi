@@ -3,6 +3,9 @@ const { json } = require("express");
 const userModel = require("../models/User");
 const argon = require("argon2");
 const User = require("../models/User");
+const jwt = require("jsonwebtoken");
+
+const universalTokenSecret = "0#82da25!3$d74f!s";
 
 router.get("/", (req, res)=>{
     res.send("hey from auth controller");
@@ -24,7 +27,8 @@ router.post("/signup", async (req, res)=>{
                 username, email, password:hash
             })
             await newUser.save();
-            res.status(200).send({username, email});
+            const token = await jwt.sign(JSON.stringify(newUser), universalTokenSecret);
+            res.status(200).send({token, user:newUser});
             return;
         }
         catch{
@@ -46,7 +50,8 @@ router.post("/login", async (req, res) => {
             if(await argon.verify(user.password, password)){
                 console.log(user);
                 const foundUser = {email, password, username: user.username};
-                res.status(200).send(foundUser);
+                const token = await jwt.sign(foundUser, universalTokenSecret);
+                res.status(200).send({token, user:foundUser});
                 return;
             }
         }

@@ -44,8 +44,10 @@ export class SignupComponent {
       if(this.signUpForm.valid){
         console.log("made it to signup")
         this.http.post(this.api, this.signUpForm.value).subscribe({
-          next: (data)=>{
-             console.log(data);
+          next: (res)=>{
+            const {user, token} = res as {token:string, user:{username:string, email:string}};
+            localStorage.setItem("iseltoken", token);
+            this.userService.setUser(user)
           },
           error: (err)=>{
             this.addError(err.error.error);

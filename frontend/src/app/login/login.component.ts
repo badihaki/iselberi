@@ -30,7 +30,9 @@ export class LoginComponent {
       this.http.post(this.api, this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res);
-          this.userService.setUser(res as {username:string, email:string});
+          const {user, token} = res as {token:string, user:{username:string, email:string}};
+          localStorage.setItem("iseltoken", token);
+          this.userService.setUser(user);
         },
         error: (err) => {
           console.log(err);
