@@ -2,7 +2,7 @@ export default function Home(){
   return(
     <div>
       <header>
-        Hello
+        Hello this is the home page
       </header>
     </div>
   )

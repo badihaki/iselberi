@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import React from 'react'
+import { Link } from '@chakra-ui/next-js'
 
 function NavigationRail() {
   return (
