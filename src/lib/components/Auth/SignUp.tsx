@@ -3,9 +3,30 @@
 import React, { ChangeEvent, useState } from 'react'
 import Form from "next/form"
 import { Button } from '@/components/ui/button';
-import { Stack } from '@chakra-ui/react';
+import { defineStyle, Field, Input, Stack } from '@chakra-ui/react';
 
 function SignUp() {
+    const floatingStyles = defineStyle({
+        pos: "absolute",
+        bg: "bg",
+        px: "0.5",
+        top: "-3",
+        insetStart: "2",
+        fontWeight: "normal",
+        pointerEvents: "none",
+        transition: "position",
+        _peerPlaceholderShown: {
+          color: "fg.muted",
+          top: "2.5",
+          insetStart: "3",
+        },
+        _peerFocusVisible: {
+          color: "fg",
+          top: "-3",
+          insetStart: "2",
+        },
+      })
+
     interface ISignUpForm{
         username:string,
         email:string,
@@ -41,29 +62,49 @@ function SignUp() {
                 </div>
                 <Form action={onSubmit}>
                     <Stack spaceY={4} align={'center'}>
-                        <div id='sign-up-username'>
-                            <span className='mr-4'>
-                                Username:
-                            </span>
-                            <input name='username' onChange={onChange} value={form.username} />
+                        <div id='sign-up-username' className='relative'>
+                            <Field.Root>
+                                <Input name='username' onChange={onChange} value={form.username} 
+                                className='peer'
+                                variant={"subtle"}
+                                />
+                                <Field.Label css={floatingStyles}>
+                                        Username
+                                </Field.Label>
+                            </Field.Root>
                         </div>
                         <div id='sign-up-email'>
-                            <span className='mr-4'>
-                                Email:
-                            </span>
-                            <input name='email' onChange={onChange} value={form.email} />
+                            <Field.Root>
+                                <Input name='email' onChange={onChange} value={form.email} 
+                                className='peer'
+                                variant={"subtle"}
+                                />
+                                <Field.Label css={floatingStyles}>
+                                        Email
+                                </Field.Label>
+                            </Field.Root>
                         </div>
                         <div id='sign-up-password'>
-                            <span className='mr-4'>
-                                Password:
-                            </span>
-                            <input name='username' onChange={onChange} value={form.password} />
+                        <Field.Root>
+                                <Input name='username' onChange={onChange} value={form.password} 
+                                className='peer'
+                                variant={"subtle"}
+                                />
+                            <Field.Label css={floatingStyles}>
+                                        Password
+                                </Field.Label>
+                        </Field.Root>
                         </div>
                         <div id='sign-up-confirm'>
-                            <span className='mr-4'>
-                                Retype to Confirm Your Password
-                            </span>
-                            <input name='username' onChange={onChange} value={form.confirmPass} />
+                            <Field.Root>
+                                <Input name='username' onChange={onChange} value={form.confirmPass} 
+                                className='peer'
+                                variant={"subtle"}
+                                />
+                                <Field.Label css={floatingStyles}>
+                                        Re-enter your password
+                                </Field.Label>
+                            </Field.Root>
                         </div>
                         <Button type='submit'>Sign Up</Button>
                     </Stack>
