@@ -13,8 +13,29 @@ import {
 import Image from "next/image";
 import React from "react";
 import userIcon from "@/lib/graphics/icons/user-round.svg";
+import Link from "next/link";
 
 function NavRail() {
+  function HomeArea(){
+    return(
+      <div
+            id="area-home"
+            className="relative m-4 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+          >
+            <Image id="home-icon"
+              src={userIcon}
+              alt="Home Icon"
+              width={50}
+              height={50}
+              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+            />
+            <div id="user-text" className="relative font-extrabold bottom-10">
+              Home
+            </div>
+          </div>
+    )
+  }
+
   function UserArea(){
     return (
       <div
@@ -97,6 +118,9 @@ function NavRail() {
         </DrawerHeader>
         <DrawerBody>
           
+          <Link href={"/"}>
+            <HomeArea />
+          </Link>
           <UserArea />
           <WorldArea />
           <FeedArea />
