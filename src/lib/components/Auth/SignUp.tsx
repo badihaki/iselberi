@@ -57,10 +57,10 @@ function SignUp() {
             <Stack align={'center'}
             className='bg-stone-400 bg-opacity-20 mx-auto'
             >
-                <div className='font-bold text-lg'>
+                <div className='font-bold text-lg pt-2 mt-2'>
                     Sign Up
                 </div>
-                <Form action={onSubmit}>
+                <Form action={onSubmit} className='py-4'>
                     <Stack spaceY={4} align={'center'}>
                         <div id='sign-up-username' className='relative'>
                             <Field.Root>
@@ -106,7 +106,10 @@ function SignUp() {
                                 </Field.Label>
                             </Field.Root>
                         </div>
-                        <Button type='submit'>Sign Up</Button>
+                        <Button size={"md"}
+                        animation={"transition-all ease-in-out 750ms"}
+                        className='transition-all ease-in-out duration-300 bg-stone-400 bg-opacity-20 hover:bg-opacity-60 active:bg-opacity-90 hover:text-black px-4 hover:px-2 py-2'
+                        type='submit'>Sign Up</Button>
                     </Stack>
                 </Form>
             </Stack>
