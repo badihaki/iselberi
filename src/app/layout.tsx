@@ -1,10 +1,7 @@
-// imports
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import NavigationRail from "@/lib/components/NavigationRail";
-import { Providers } from "./poviders";
-// end-imports
+import { Provider } from "@/components/ui/provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,14 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>
-          <NavigationRail />
-          <div id="content">{children}</div>
-        </Providers>
+        <Provider>
+        {children}
+        </Provider>
       </body>
     </html>
   );
