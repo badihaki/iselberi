@@ -15,6 +15,66 @@ import React from "react";
 import userIcon from "@/lib/graphics/icons/user-round.svg";
 
 function NavRail() {
+  function UserArea(){
+    return (
+      <div
+            id="area-user"
+            className="relative m-4 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+          >
+            <Image id="user-icon"
+              src={userIcon}
+              alt="User Icon"
+              width={50}
+              height={50}
+              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+            />
+            <div id="user-text" className="relative font-extrabold bottom-10">
+              User
+            </div>
+          </div>
+    )
+  }
+
+  function WorldArea(){
+    return (
+      <div
+            id="area-world"
+            className="relative mx-4 my-6 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+          >
+            <Image id="world-icon"
+              src={userIcon}
+              alt="World Icon"
+              width={50}
+              height={50}
+              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+            />
+            <div id="world-text" className="relative font-extrabold bottom-10">
+              World
+            </div>
+          </div>
+    )
+  }
+
+  function FeedArea(){
+    return (
+      <div
+            id="area-feed"
+            className="relative mx-4 my-6 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+          >
+            <Image
+              src={userIcon}
+              alt="Feed Icon"
+              width={50}
+              height={50}
+              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+            />
+            <div id="user-text" className="relative font-extrabold bottom-10">
+              Feed
+            </div>
+          </div>
+    )
+  }
+
   return (
     <DrawerRoot size={"xs"} placement={"start"}>
       <DrawerBackdrop />
@@ -36,21 +96,11 @@ function NavRail() {
           <DrawerTitle />
         </DrawerHeader>
         <DrawerBody>
-          <div
-            id="area-user"
-            className="m-4 bg-stone-500 bg-opacity-10 text-center my-auto py-4 px-2"
-          >
-            <Image
-              src={userIcon}
-              alt="User Icon"
-              width={50}
-              height={50}
-              className="bg-slate-100 bg-opacity-40 rounded-full pb-2"
-            />
-            <div id="user-text" className="font-extrabold">
-              User
-            </div>
-          </div>
+          
+          <UserArea />
+          <WorldArea />
+          <FeedArea />
+
         </DrawerBody>
         <DrawerFooter />
       </DrawerContent>
