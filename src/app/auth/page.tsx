@@ -23,10 +23,15 @@ function Auth() {
         }
     }
   return (
-    <div className='ml-24 mr-6 bg-stone-300 bg-opacity-10 items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
-      Auth
-      <SignUp />
-      <LogIn SetAuth={SetAuth} />
+    <div className='ml-24 mr-6 bg-stone-300 bg-opacity-10 items-center justify-items-center grid grid-rows-[20px_1fr_20px] min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>
+      <div>
+        Log in or sign up below
+      </div>
+      <div>
+        <SignUp />
+        <br />
+        <LogIn SetAuth={SetAuth} />
+      </div>
     </div>
   )
 }
