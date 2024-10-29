@@ -1,17 +1,19 @@
 import React from 'react'
 
 export default function FeedPost(props:{
-    postID:number,
-    postUser:string,
-    content:string
+    post:{
+        postID:number,
+        postUser:string,
+        content:string
+    }
 }) {
   return (
-    <div key={props.postID}>
+    <div key={props.post.postID}>
       <div>
-        {props.postUser}
+        {props.post.postUser}
       </div>
       <div>
-        {props.content}
+        {props.post.content}
       </div>
     </div>
   )
