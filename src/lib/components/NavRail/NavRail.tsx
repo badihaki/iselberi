@@ -17,15 +17,11 @@ import React from "react";
 import Link from "next/link";
 
 // image links
-import userIcon from "@/lib/graphics/icons/user-round.svg";
 import worldIcon from "@/lib/graphics/icons/globe.svg";
 import homeIcon from "@/lib/graphics/icons/house.svg";
 import feedIcon from "@/lib/graphics/icons/newspaper.svg";
-import { useAtom } from "jotai";
-import { userAtom } from "@/lib/jotai/userAtom";
 
 function NavRail() {
-  const [user] = useAtom(userAtom);
 
   function HomeArea(){
     return(
@@ -42,26 +38,6 @@ function NavRail() {
             />
             <div id="user-text" className="relative font-extrabold bottom-10">
               Home
-            </div>
-          </div>
-    )
-  }
-
-  function UserArea(){
-    return (
-      <div
-            id="area-user"
-            className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
-          >
-            <Image id="user-icon"
-              src={userIcon}
-              alt="User Icon"
-              width={50}
-              height={50}
-              className="bg-slate-100 bg-opacity-40 rounded-full p-1"
-            />
-            <div id="user-text" className="relative font-extrabold bottom-10">
-              {user.username != "" ? "User Profile":"Log In / Sign Up"}
             </div>
           </div>
     )
@@ -134,11 +110,6 @@ function NavRail() {
           </Link>
           <WorldArea />
           <FeedArea />
-          <br />
-          <br />
-          <Link href={user.username != ""? "/profile" : "/auth"}>
-            <UserArea />
-          </Link>
 
         </DrawerBody>
         <DrawerFooter />
