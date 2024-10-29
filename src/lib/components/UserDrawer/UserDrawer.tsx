@@ -20,6 +20,7 @@ import userIcon from "@/lib/graphics/icons/user-round.svg";
 import { useAtom } from "jotai";
 import { userAtom } from "@/lib/jotai/userAtom";
 import MiniProfile from "./MiniProfile";
+import LogoutButton from "../Auth/LogoutButton";
 
 function UserDrawer() {
   const [user] = useAtom(userAtom);
@@ -51,11 +52,18 @@ function UserDrawer() {
             <DrawerTitle />
             </DrawerHeader>
             <DrawerBody>
-            {user.username != "" ? (
+            {
+            user.username != "" ? (
                 <MiniProfile />
             ) : (
                 <Link href={"/auth"}>Log In Sign Up</Link>
             )}
+            {
+              user.username != "" ?
+              <LogoutButton />
+              :
+              ""
+            }
             </DrawerBody>
             <DrawerFooter />
         </DrawerContent>

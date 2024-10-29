@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React from 'react'
 
 function MiniProfile() {
-    const [user, setUser] = useAtom(userAtom);
+    const [user] = useAtom(userAtom);
   return (
     <div>
         <Stack>
