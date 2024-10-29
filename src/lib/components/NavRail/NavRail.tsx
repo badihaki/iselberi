@@ -15,29 +15,34 @@ import {
 import Image from "next/image";
 import React from "react";
 import Link from "next/link";
+// state imports
+import { useAtom } from "jotai";
+import { userAtom } from "@/lib/jotai/userAtom";
 
 // image links
 import worldIcon from "@/lib/graphics/icons/globe.svg";
 import homeIcon from "@/lib/graphics/icons/house.svg";
 import feedIcon from "@/lib/graphics/icons/newspaper.svg";
+import friendIcon from "@/lib/graphics/icons/handshake.svg"
 
 function NavRail() {
+  const [user] = useAtom(userAtom);
 
-  function HomeArea(){
+  function CharacterArea(){
     return(
       <div
-            id="area-home"
+            id="character-area"
             className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
           >
-            <Image id="home-icon"
+            <Image id="character-icon"
               src={homeIcon}
-              alt="Home Icon"
+              alt="Character Icon"
               width={50}
               height={50}
               className="bg-slate-100 bg-opacity-40 rounded-full p-1"
             />
-            <div id="user-text" className="relative font-extrabold bottom-10">
-              Home
+            <div id="character-text" className="relative font-extrabold bottom-10">
+              Character
             </div>
           </div>
     )
@@ -46,7 +51,7 @@ function NavRail() {
   function WorldArea(){
     return (
       <div
-            id="area-world"
+            id="world-area"
             className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
           >
             <Image id="world-icon"
@@ -66,7 +71,7 @@ function NavRail() {
   function FeedArea(){
     return (
       <div
-            id="area-feed"
+            id="feed-area"
             className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
           >
             <Image
@@ -80,6 +85,26 @@ function NavRail() {
               Feed
             </div>
           </div>
+    )
+  }
+
+  function AlliesArea(){
+    return(
+      <div
+      id="allies-area"
+      className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
+    >
+      <Image
+        src={friendIcon}
+        alt="Feed Icon"
+        width={50}
+        height={50}
+        className="bg-slate-100 bg-opacity-40 rounded-full p-1"
+      />
+      <div id="user-text" className="relative font-extrabold bottom-10">
+        Allies
+      </div>
+    </div>
     )
   }
 
@@ -107,10 +132,30 @@ function NavRail() {
           <DrawerBody>
             
             <Link href={"/"}>
-              <HomeArea />
+              <FeedArea />
             </Link>
-            <WorldArea />
-            <FeedArea />
+            
+            <Link href={"/world"}>
+              <WorldArea />
+            </Link>
+            
+            {user.username != "" ?
+            <Link href={"/allies"}>
+              <AlliesArea />
+            </Link>
+            :
+            ""
+            }
+            <br />
+            
+{
+              user.username != "" ?
+            <Link href={"/character"}>
+              <CharacterArea />
+            </Link>
+            :
+            ""
+}
 
           </DrawerBody>
           <DrawerFooter />
