@@ -84,37 +84,39 @@ function NavRail() {
   }
 
   return (
-    <DrawerRoot size={"xs"} placement={"start"}>
-      <DrawerBackdrop />
-      <DrawerTrigger asChild>
-        <Button
-          variant={"outline"}
-          size={"md"}
-          backgroundColor={"slateblue"}
-          margin={4}
-          padding={2}
-          fontSize={22}
-        >
-          Navigation
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent offset={4} rounded="md">
-        <DrawerCloseTrigger />
-        <DrawerHeader>
-          <DrawerTitle />
-        </DrawerHeader>
-        <DrawerBody>
-          
-          <Link href={"/"}>
-            <HomeArea />
-          </Link>
-          <WorldArea />
-          <FeedArea />
+    <div className="absolute left-0 top-0">
+      <DrawerRoot size={"xs"} placement={"start"}>
+        <DrawerBackdrop />
+        <DrawerTrigger asChild>
+          <Button
+            variant={"outline"}
+            size={"md"}
+            backgroundColor={"slateblue"}
+            margin={4}
+            padding={2}
+            fontSize={22}
+          >
+            Navigation
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent offset={4} rounded="md">
+          <DrawerCloseTrigger />
+          <DrawerHeader>
+            <DrawerTitle />
+          </DrawerHeader>
+          <DrawerBody>
+            
+            <Link href={"/"}>
+              <HomeArea />
+            </Link>
+            <WorldArea />
+            <FeedArea />
 
-        </DrawerBody>
-        <DrawerFooter />
-      </DrawerContent>
-    </DrawerRoot>
+          </DrawerBody>
+          <DrawerFooter />
+        </DrawerContent>
+      </DrawerRoot>
+    </div>
   );
 }
 
