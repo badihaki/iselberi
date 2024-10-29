@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import {
   DrawerBackdrop,
@@ -59,7 +61,7 @@ function NavRail() {
               className="bg-slate-100 bg-opacity-40 rounded-full p-1"
             />
             <div id="user-text" className="relative font-extrabold bottom-10">
-              User
+              {user.username != "" ? "User Profile":"Log In / Sign Up"}
             </div>
           </div>
     )
