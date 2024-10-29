@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Provider } from "@/components/ui/provider";
 import NavRail from "@/lib/components/NavRail/NavRail";
+import UserDrawer from "@/lib/components/UserDrawer/UserDrawer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -33,6 +34,7 @@ export default function RootLayout({
         <Provider>
           <NavRail />
           {children}
+          <UserDrawer />
         </Provider>
       </body>
     </html>
