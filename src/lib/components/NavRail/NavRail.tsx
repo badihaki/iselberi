@@ -12,22 +12,31 @@ import {
 } from "@/components/ui/drawer";
 import Image from "next/image";
 import React from "react";
-import userIcon from "@/lib/graphics/icons/user-round.svg";
 import Link from "next/link";
 
+// image links
+import userIcon from "@/lib/graphics/icons/user-round.svg";
+import worldIcon from "@/lib/graphics/icons/globe.svg";
+import homeIcon from "@/lib/graphics/icons/house.svg";
+import feedIcon from "@/lib/graphics/icons/newspaper.svg";
+import { useAtom } from "jotai";
+import { userAtom } from "@/lib/jotai/userAtom";
+
 function NavRail() {
+  const [user] = useAtom(userAtom);
+
   function HomeArea(){
     return(
       <div
             id="area-home"
-            className="relative m-4 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+            className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
           >
             <Image id="home-icon"
-              src={userIcon}
+              src={homeIcon}
               alt="Home Icon"
               width={50}
               height={50}
-              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+              className="bg-slate-100 bg-opacity-40 rounded-full p-1"
             />
             <div id="user-text" className="relative font-extrabold bottom-10">
               Home
@@ -40,14 +49,14 @@ function NavRail() {
     return (
       <div
             id="area-user"
-            className="relative m-4 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+            className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
           >
             <Image id="user-icon"
               src={userIcon}
               alt="User Icon"
               width={50}
               height={50}
-              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+              className="bg-slate-100 bg-opacity-40 rounded-full p-1"
             />
             <div id="user-text" className="relative font-extrabold bottom-10">
               User
@@ -60,14 +69,14 @@ function NavRail() {
     return (
       <div
             id="area-world"
-            className="relative mx-4 my-6 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+            className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
           >
             <Image id="world-icon"
-              src={userIcon}
+              src={worldIcon}
               alt="World Icon"
               width={50}
               height={50}
-              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+              className="bg-slate-100 bg-opacity-40 rounded-full p-1"
             />
             <div id="world-text" className="relative font-extrabold bottom-10">
               World
@@ -80,14 +89,14 @@ function NavRail() {
     return (
       <div
             id="area-feed"
-            className="relative mx-4 my-6 bg-stone-500 bg-opacity-10 text-center pt-4 px-4 rounded-3xl"
+            className="transition-all ease-in-out duration-500 relative m-4 bg-stone-500 bg-opacity-10 hover:bg-opacity-65 text-center pt-4 px-4 rounded-3xl"
           >
             <Image
-              src={userIcon}
+              src={feedIcon}
               alt="Feed Icon"
               width={50}
               height={50}
-              className="bg-slate-100 bg-opacity-40 rounded-full pb-1"
+              className="bg-slate-100 bg-opacity-40 rounded-full p-1"
             />
             <div id="user-text" className="relative font-extrabold bottom-10">
               Feed
@@ -121,9 +130,13 @@ function NavRail() {
           <Link href={"/"}>
             <HomeArea />
           </Link>
-          <UserArea />
           <WorldArea />
           <FeedArea />
+          <br />
+          <br />
+          <Link href={user.username != ""? "/profile" : "/auth"}>
+            <UserArea />
+          </Link>
 
         </DrawerBody>
         <DrawerFooter />

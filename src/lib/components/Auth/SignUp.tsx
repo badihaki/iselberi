@@ -49,7 +49,7 @@ function SignUp() {
     }
 
     function onSubmit(formData:FormData){
-        console.log(formData);
+        // console.log(formData);
     }
 
     return (

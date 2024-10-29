@@ -37,4 +37,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 
 # Iselberi
-A social media mock by Haki Martin. Created with NextJS, Chakra UI, MySQL and Jotai
+A social media mock by Haki Martin. Created with NextJS, Chakra UI with Lucide Icons, MySQL and Jotai
