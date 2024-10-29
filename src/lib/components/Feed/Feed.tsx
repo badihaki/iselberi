@@ -1,6 +1,6 @@
 import React from 'react'
 import FeedPost from './FeedPost';
-import { Stack } from '@chakra-ui/react';
+import { Box, Center, Stack, Text } from '@chakra-ui/react';
 
 export default function Feed() { 
     const postTemplate:{
@@ -29,7 +29,6 @@ export default function Feed() {
     }
     
     const feedPosts = posts().map(post=>{
-        console.log(post);
         return <FeedPost post={post} key={post.postID} />
     })
 
@@ -37,10 +36,20 @@ export default function Feed() {
 
   return (
     <div>
-      Feed
-      <Stack>
-        {feedPosts}
-      </Stack>
+        {/* Start of heading component */}
+        <div>
+            <Center>
+                <Text textStyle={"3xl"} fontWeight={"semibold"}>
+                    Feed
+                </Text>
+            </Center>
+        </div>
+        {/* End of heading component */}
+        <Box bg={"slategray/35"} px={16} py={8} shadow={"2xl"} borderRadius={"md"}>
+            <Stack>
+                {feedPosts}
+            </Stack>
+        </Box>
     </div>
   )
 }
