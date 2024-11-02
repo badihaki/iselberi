@@ -7,6 +7,7 @@ import { defineStyle, Field, Input, Stack } from '@chakra-ui/react';
 import axios from 'axios';
 
 function SignUp() {
+    const [error, setError] = useState<string>("");
     const floatingStyles = defineStyle({
         pos: "absolute",
         bg: "bg",
@@ -47,27 +48,16 @@ function SignUp() {
         setForm(update);
     }
 
-    async function onSubmit(formData:FormData){
-        console.log("formData below");
-        console.log(formData);
+    async function onSubmit(){
         try{
             const body = JSON.stringify(form);
-            
-            // const user = await fetch("api/auth/signup", {
-            //     method:"POST",
-            //     headers: {
-            //         "Content-Type" : "application/json"
-            //     },
-            //     body: body,
-            // })
             
             const user = await axios.post("api/auth/signup", body);
 
             console.log(user.data);
         }
         catch(err:any){
-            console.log(">>>>>>>> ERROR! <<<<<<<")
-            console.log(err);
+            setError(err.response.data.message);
         }
     }
 
@@ -132,6 +122,9 @@ function SignUp() {
                     </Stack>
                 </Form>
             </Stack>
+            <div>
+                {error}
+            </div>
         </div>
     )
 }
