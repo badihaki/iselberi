@@ -4,6 +4,7 @@ import React, { ChangeEvent, useState } from 'react'
 import Form from "next/form"
 import { Button } from '@/components/ui/button';
 import { defineStyle, Field, Input, Stack } from '@chakra-ui/react';
+import axios from 'axios';
 
 function SignUp() {
     const floatingStyles = defineStyle({
@@ -48,8 +49,26 @@ function SignUp() {
         setForm(update);
     }
 
-    function onSubmit(formData:FormData){
-        // console.log(formData);
+    async function onSubmit(formData:FormData){
+        console.log(formData);
+        try{
+            const body = JSON.stringify(form);
+            
+            // const user = await fetch("api/auth/signup", {
+            //     method:"POST",
+            //     headers: {
+            //         "Content-Type" : "application/json"
+            //     },
+            //     body: body,
+            // })
+            
+            const user = await axios.post("api/auth/signup", body);
+
+            console.log(user.data);
+        }
+        catch(err:any){
+            console.log(err);
+        }
     }
 
     return (
@@ -86,7 +105,7 @@ function SignUp() {
                         </div>
                         <div id='sign-up-password'>
                         <Field.Root>
-                                <Input name='username' onChange={onChange} value={form.password} 
+                                <Input name='password' onChange={onChange} value={form.password} 
                                 className='peer'
                                 variant={"subtle"}
                                 />
@@ -97,7 +116,7 @@ function SignUp() {
                         </div>
                         <div id='sign-up-confirm'>
                             <Field.Root>
-                                <Input name='username' onChange={onChange} value={form.confirmPass} 
+                                <Input name='confirmPass' onChange={onChange} value={form.confirmPass} 
                                 className='peer'
                                 variant={"subtle"}
                                 />
