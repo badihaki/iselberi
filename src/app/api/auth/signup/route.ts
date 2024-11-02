@@ -1,13 +1,35 @@
+import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 
 // api/auth/signup
 export async function POST(req:NextRequest) {
-    console.log(req.body);
-    const response = NextResponse.json({
-        message:"got a response",
-        success:true
-    },{status:200});
+    try{
+        const body = await req.json();
+        const {username, email, password, confirmPass} = body;
+        
+        if(password !== confirmPass){
+            throw new Error("passwords don't match");
+        }
+        
+        const user = await prisma.user.create({
+            data:{
+                username,
+                email,
+                password
+            }
+        })
 
-    return response;
+        const response = NextResponse.json({
+            message:"got a response",
+            success:true,
+            user
+        },{status:200});
+        return response;
+    }
+    catch(err:any){
+        console.log(err.message);
+        const response = NextResponse.json({message:err.message},{status:409});
+        return response;
+    }
 }
