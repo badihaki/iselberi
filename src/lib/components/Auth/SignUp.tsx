@@ -71,7 +71,7 @@ function SignUp() {
     return (
         <div>
             <Stack align={'center'}
-            className='bg-stone-400 bg-opacity-20 mx-auto'
+            className='bg-stone-400 bg-opacity-20 mx-auto px-4'
             >
                 <div className='font-bold text-lg pt-2 mt-2'>
                     Sign Up
@@ -129,7 +129,10 @@ function SignUp() {
                     </Stack>
                 </Form>
             </Stack>
-            <div>
+            <div className='
+            absolute bottom-2/4
+            bg-red-700 text-black font-extrabold text-center rounded-2xl mx-auto px-2
+            '>
                 {error}
             </div>
         </div>
