@@ -57,8 +57,15 @@ function SignUp() {
             console.log(user.data);
         }
         catch(err:any){
-            setError(err.response.data.message);
+            showError(err.response.data.message);
         }
+    }
+
+    async function showError(message:string) {
+        setError(message);
+        setTimeout(() => {
+            setError("");
+        }, 5000);
     }
 
     return (
