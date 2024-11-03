@@ -37,12 +37,14 @@ function SignUp(props:{SetAuth:(user:IUser)=>void}) {
         password:string,
         confirmPass:string,
     }
-    const [form, setForm] = useState<ISignUpForm>({
+
+    const formDefault = {
         username:"",
         email:"",
         confirmPass:"",
         password:""
-    })
+    }
+    const [form, setForm] = useState<ISignUpForm>(formDefault);
     
     function onChange(ev:ChangeEvent<HTMLInputElement>){
         const update = {...form};
@@ -51,12 +53,7 @@ function SignUp(props:{SetAuth:(user:IUser)=>void}) {
     }
 
     async function onSubmit(){
-        setForm({
-            username:"",
-            email:"",
-            confirmPass:"",
-            password:""
-        });
+        setForm(formDefault);
         setSubmitDisabled(true);
         try{
             const body = JSON.stringify(form);

@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { IUser } from '@/lib/interfaces/IUser'
 import { defineStyle, Field, Input, Stack } from '@chakra-ui/react'
+import axios from 'axios'
 import Form from 'next/form'
 import React, { ChangeEvent, useState } from 'react'
 
@@ -28,7 +29,10 @@ function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
         },
       })
 
-      const formDefaultState = {
+    const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
+    const [error, setError] = useState<string>("");
+
+    const formDefaultState = {
         email:"",
         password:""
       };
@@ -45,14 +49,30 @@ function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
         setForm(update);
     }
 
-    function onSubmit(){
+    async function onSubmit(){
         // console.log(formData);
         setForm(formDefaultState);
-        props.SetAuth({
-            email:form.email,
-            password:form.password,
-            username:"Admin"
-        })
+        setSubmitDisabled(true);
+        // props.SetAuth({
+        //     email:form.email,
+        //     password:form.password,
+        //     username:"Admin"
+        // })
+        try{
+            const body = JSON.stringify(form);
+            const response = await axios.post("api/auth/login",body);
+            props.SetAuth(response.data);
+        }catch(err:any){
+            showError(err.response.data.message);
+        }
+    }
+
+    async function showError(message:string) {
+        setError(message);
+        setTimeout(() => {
+            setError("");
+            setSubmitDisabled(false);
+        }, 5000);
     }
 
     return (
@@ -91,10 +111,16 @@ function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
                         <Button size={"md"}
                         animation={"transition-all ease-in-out 750ms"}
                         className='transition-all ease-in-out duration-300 bg-stone-400 bg-opacity-20 hover:bg-opacity-60 active:bg-opacity-90 hover:text-black px-4 hover:px-2 py-2'
-                        type='submit'>Log In</Button>
+                        type='submit' disabled={submitDisabled}>Log In</Button>
                     </Stack>
                 </Form>
             </Stack>
+            <div className='
+            absolute bottom-2/4
+            bg-red-700 text-black font-extrabold text-center rounded-2xl mx-auto px-2
+            '>
+                {error}
+            </div>
         </div>
     )
 }
