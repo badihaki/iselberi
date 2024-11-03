@@ -9,10 +9,14 @@ export async function POST(req:NextRequest) {
         const {username, email, password, confirmPass} = body;
         
         if(password !== confirmPass){
-            throw new Error("passwords don't match");
+            throw new Error("Passwords don't match.");
         }
-        
-        const user = await prisma.user.create({
+        const emailCheck = await prisma.user.findFirst({where:{email}});
+        if(emailCheck){
+            throw new Error("Email already exists.")
+        }
+
+        const newUser = await prisma.user.create({
             data:{
                 username,
                 email,
@@ -23,7 +27,7 @@ export async function POST(req:NextRequest) {
         const response = NextResponse.json({
             message:"got a response",
             success:true,
-            user
+            user: newUser
         },{status:200});
         return response;
     }

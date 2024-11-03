@@ -8,6 +8,7 @@ import axios from 'axios';
 
 function SignUp() {
     const [error, setError] = useState<string>("");
+    const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
     const floatingStyles = defineStyle({
         pos: "absolute",
         bg: "bg",
@@ -49,22 +50,30 @@ function SignUp() {
     }
 
     async function onSubmit(){
+        setForm({
+            username:"",
+            email:"",
+            confirmPass:"",
+            password:""
+        });
+        setSubmitDisabled(true);
         try{
             const body = JSON.stringify(form);
             
             const user = await axios.post("api/auth/signup", body);
-
+            
             console.log(user.data);
         }
         catch(err:any){
             showError(err.response.data.message);
         }
     }
-
+    
     async function showError(message:string) {
         setError(message);
         setTimeout(() => {
             setError("");
+            setSubmitDisabled(false);
         }, 5000);
     }
 
@@ -125,7 +134,7 @@ function SignUp() {
                         <Button size={"md"}
                         animation={"transition-all ease-in-out 750ms"}
                         className='transition-all ease-in-out duration-300 bg-stone-400 bg-opacity-20 hover:bg-opacity-60 active:bg-opacity-90 hover:text-black px-4 hover:px-2 py-2'
-                        type='submit'>Sign Up</Button>
+                        type='submit' disabled={submitDisabled}>Sign Up</Button>
                     </Stack>
                 </Form>
             </Stack>
