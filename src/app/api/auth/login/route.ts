@@ -1,11 +1,20 @@
+import prisma from "@/lib/prisma";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req:NextRequest) {
     try{
-        const request = await req.json();
-        console.log(request.body);
-        
-        const response = NextResponse.json({message:"ok"},{status:400});
+        const body = await req.json();
+        const {email, password} = body;
+
+        const user = await prisma.user.findFirst({where:{email}});
+        if(!user){
+            throw new Error("Email not found");
+        }
+        if(password !== user.password){
+            throw new Error("Wrong password");
+        }
+
+        const response = NextResponse.json({user, success:true},{status:200});
         return response;
     }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

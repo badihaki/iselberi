@@ -25,7 +25,6 @@ export async function POST(req:NextRequest) {
         })
 
         const response = NextResponse.json({
-            message:"got a response",
             success:true,
             user: newUser
         },{status:200});

@@ -64,7 +64,11 @@ function SignUp(props:{SetAuth:(user:IUser)=>void}) {
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         catch(err:any){
-            showError(err.response.data.message);
+            console.log("ran into an error");
+            console.log(err);
+            if(err){
+                showError(err.response.data.message);
+            }
         }
     }
     

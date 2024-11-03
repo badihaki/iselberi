@@ -53,24 +53,25 @@ function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
         // console.log(formData);
         setForm(formDefaultState);
         setSubmitDisabled(true);
-        // props.SetAuth({
-            //     email:form.email,
-            //     password:form.password,
-            //     username:"Admin"
-            // })
+
             try{
                 const body = JSON.stringify(form);
                 const response = await axios.post("api/auth/login",body);
-                props.SetAuth(response.data);
+                // console.log("got the following response >>>>>>>>>");
+                // console.log(response.data.user);
+                props.SetAuth(response.data.user);
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             catch(err:any){
-                showError(err.response.data.message);
-                setSubmitDisabled(false);
+                console.log("ran into an error");
+                if(err){
+                    showError(err.response.data.error);
+                }
+            }
         }
-    }
 
     async function showError(message:string) {
+        console.log(message);
         setError(message);
         setTimeout(() => {
             setError("");
