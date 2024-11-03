@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { defineStyle, Field, Input, Stack } from '@chakra-ui/react';
 import axios from 'axios';
 import { IUser } from '@/lib/interfaces/IUser';
+import { redirect } from 'next/navigation';
 
 function SignUp(props:{SetAuth:(user:IUser)=>void}) {
     const [error, setError] = useState<string>("");
@@ -55,12 +56,14 @@ function SignUp(props:{SetAuth:(user:IUser)=>void}) {
     async function onSubmit(){
         setForm(formDefault);
         setSubmitDisabled(true);
+        let respGood = false;
         try{
             const body = JSON.stringify(form);
             
             const user = await axios.post("api/auth/signup", body);            
             // console.log(user.data);
             props.SetAuth(user.data);
+            respGood = true;
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         catch(err:any){
@@ -68,6 +71,11 @@ function SignUp(props:{SetAuth:(user:IUser)=>void}) {
             console.log(err);
             if(err){
                 showError(err.response.data.message);
+            }
+        }
+        finally{
+            if(respGood){
+                redirect("/");
             }
         }
     }

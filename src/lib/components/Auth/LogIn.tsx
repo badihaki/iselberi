@@ -5,6 +5,8 @@ import { IUser } from '@/lib/interfaces/IUser'
 import { defineStyle, Field, Input, Stack } from '@chakra-ui/react'
 import axios from 'axios'
 import Form from 'next/form'
+import { redirect } from 'next/navigation'
+import Router from 'next/router'
 import React, { ChangeEvent, useState } from 'react'
 
 function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
@@ -53,19 +55,27 @@ function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
         // console.log(formData);
         setForm(formDefaultState);
         setSubmitDisabled(true);
-
+        let respGood = false;
             try{
                 const body = JSON.stringify(form);
                 const response = await axios.post("api/auth/login",body);
                 // console.log("got the following response >>>>>>>>>");
                 // console.log(response.data.user);
                 props.SetAuth(response.data.user);
+                respGood = true;
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             catch(err:any){
                 console.log("ran into an error");
+                console.log(err);
                 if(err){
                     showError(err.response.data.error);
+                }
+            }
+            finally{
+                if(respGood){
+                    // Router.push("/");
+                    redirect("/");
                 }
             }
         }
