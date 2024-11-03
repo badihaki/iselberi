@@ -62,7 +62,7 @@ function SignUp(props:{SetAuth:(user:IUser)=>void}) {
             
             const user = await axios.post("api/auth/signup", body);            
             // console.log(user.data);
-            props.SetAuth(user.data);
+            props.SetAuth(user.data.user);
             respGood = true;
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
