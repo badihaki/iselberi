@@ -5,8 +5,9 @@ import Form from "next/form"
 import { Button } from '@/components/ui/button';
 import { defineStyle, Field, Input, Stack } from '@chakra-ui/react';
 import axios from 'axios';
+import { IUser } from '@/lib/interfaces/IUser';
 
-function SignUp() {
+function SignUp(props:{SetAuth:(user:IUser)=>void}) {
     const [error, setError] = useState<string>("");
     const [submitDisabled, setSubmitDisabled] = useState<boolean>(false);
     const floatingStyles = defineStyle({
@@ -60,9 +61,9 @@ function SignUp() {
         try{
             const body = JSON.stringify(form);
             
-            const user = await axios.post("api/auth/signup", body);
-            
-            console.log(user.data);
+            const user = await axios.post("api/auth/signup", body);            
+            // console.log(user.data);
+            props.SetAuth(user.data);
         }
         catch(err:any){
             showError(err.response.data.message);

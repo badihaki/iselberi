@@ -2,6 +2,7 @@
 
 import LogIn from '@/lib/components/Auth/LogIn'
 import SignUp from '@/lib/components/Auth/SignUp'
+import { IUser } from '@/lib/interfaces/IUser'
 import { userAtom } from '@/lib/jotai/userAtom'
 import { useAtom } from 'jotai'
 import { redirect } from 'next/navigation'
@@ -10,11 +11,11 @@ import React from 'react'
 function Auth() {
     const [user, setUser] = useAtom(userAtom);
 
-    function SetAuth(userInput:{email:string, password:string}){
+    function SetAuth(newUser:IUser){
         // console.log("from SetAuth():");
         // console.log(userInput);
-        if(userInput.email === "admin@iselberi.gg" && userInput.password === "pass"){
-            setUser({...userInput, username:"Admin"});
+        if(newUser.email === "admin@iselberi.gg" && newUser.password === "pass"){
+            setUser(newUser);
             console.log(`logged in ${user.username}`)
             redirect("/");
         }
@@ -28,7 +29,7 @@ function Auth() {
         Log in or sign up below
       </div>
       <div>
-        <SignUp />
+        <SignUp SetAuth={SetAuth}  />
         <br />
         <LogIn SetAuth={SetAuth} />
       </div>

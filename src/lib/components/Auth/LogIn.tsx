@@ -1,11 +1,12 @@
 "use client"
 
 import { Button } from '@/components/ui/button'
+import { IUser } from '@/lib/interfaces/IUser'
 import { defineStyle, Field, Input, Stack } from '@chakra-ui/react'
 import Form from 'next/form'
 import React, { ChangeEvent, useState } from 'react'
 
-function LogIn( props:{SetAuth:(user:{email:string, password:string})=>void} ) {
+function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
     const floatingStyles = defineStyle({
         pos: "absolute",
         bg: "bg",
@@ -27,13 +28,14 @@ function LogIn( props:{SetAuth:(user:{email:string, password:string})=>void} ) {
         },
       })
 
+      const formDefaultState = {
+        email:"",
+        password:""
+      };
       const [form, setForm] = useState<{
         email:string,
         password:string
-      }>({
-        email:"",
-        password:""
-      })
+      }>(formDefaultState)
 
       function onChange(ev:ChangeEvent<HTMLInputElement>){
         // console.log(ev.target.value);
@@ -43,11 +45,13 @@ function LogIn( props:{SetAuth:(user:{email:string, password:string})=>void} ) {
         setForm(update);
     }
 
-    function onSubmit(formData:FormData){
+    function onSubmit(){
         // console.log(formData);
+        setForm(formDefaultState);
         props.SetAuth({
             email:form.email,
-            password:form.password
+            password:form.password,
+            username:"Admin"
         })
     }
 
