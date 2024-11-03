@@ -14,14 +14,9 @@ function Auth() {
     function SetAuth(newUser:IUser){
         // console.log("from SetAuth():");
         // console.log(userInput);
-        if(newUser.email === "admin@iselberi.gg" && newUser.password === "pass"){
-            setUser(newUser);
-            console.log(`logged in ${user.username}`)
-            redirect("/");
-        }
-        else{
-            console.log(`wrong email or password. Email is 'admin@iselberi.gg' and password is 'pass'`)
-        }
+        setUser(newUser);
+        console.log(`logged in ${user.username}`)
+        redirect("/");
     }
   return (
     <div className='ml-24 mr-6 bg-stone-300 bg-opacity-10 items-center justify-items-center grid grid-rows-[20px_1fr_20px] min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]'>

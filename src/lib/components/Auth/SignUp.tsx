@@ -62,6 +62,7 @@ function SignUp(props:{SetAuth:(user:IUser)=>void}) {
             // console.log(user.data);
             props.SetAuth(user.data);
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         catch(err:any){
             showError(err.response.data.message);
         }

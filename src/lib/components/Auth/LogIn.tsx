@@ -54,16 +54,19 @@ function LogIn( props:{SetAuth:(user:IUser)=>void} ) {
         setForm(formDefaultState);
         setSubmitDisabled(true);
         // props.SetAuth({
-        //     email:form.email,
-        //     password:form.password,
-        //     username:"Admin"
-        // })
-        try{
-            const body = JSON.stringify(form);
-            const response = await axios.post("api/auth/login",body);
-            props.SetAuth(response.data);
-        }catch(err:any){
-            showError(err.response.data.message);
+            //     email:form.email,
+            //     password:form.password,
+            //     username:"Admin"
+            // })
+            try{
+                const body = JSON.stringify(form);
+                const response = await axios.post("api/auth/login",body);
+                props.SetAuth(response.data);
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            catch(err:any){
+                showError(err.response.data.message);
+                setSubmitDisabled(false);
         }
     }
 
