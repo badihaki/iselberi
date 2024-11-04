@@ -6,7 +6,6 @@ import { defineStyle, Field, Input, Stack } from '@chakra-ui/react'
 import axios from 'axios'
 import Form from 'next/form'
 import { redirect } from 'next/navigation'
-import Router from 'next/router'
 import React, { ChangeEvent, useState } from 'react'
 
 function LogIn( props:{SetAuth:(user:IUser)=>void} ) {

@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/drawer";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 // image links
 import userIcon from "@/lib/graphics/icons/user-round.svg";
 import { useAtom } from "jotai";
@@ -24,6 +24,10 @@ import LogoutButton from "../Auth/LogoutButton";
 
 function UserDrawer() {
   const [user] = useAtom(userAtom);
+
+  useEffect(()=>{
+    console.log(">>>>>>>>> startup logic <<<<<<<<<<<")
+  },[])
 
   return (
     <div className="absolute right-0 top-0">
